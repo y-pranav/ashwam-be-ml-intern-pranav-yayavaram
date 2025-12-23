@@ -1,5 +1,8 @@
 # Light Parsing System for Food and Symptom Extraction
 
+> **Exercise C** submission for Ashwam Backend Engineering Internship.  
+> Built a two-parser architecture to demonstrate clean separation of concerns and system design thinking.
+
 A privacy-first, deterministic parsing system for extracting food and symptom signals from women's health journal entries.
 
 ## Overview
@@ -181,29 +184,10 @@ Each parsed entry produces:
 
 ## Known Limitations
 
-### FoodParser Limitations
-
-1. **Context blindness**: Cannot distinguish "ate rice" vs "bought rice"
-2. **Ambiguous foods**: "rose" (flower vs. past tense of rise) not handled
-3. **Compound dishes**: "egg biryani" detects both "egg" and "biryani" separately
-4. **Preparation methods**: Doesn't distinguish "fried egg" vs "boiled egg"
-5. **Portion sizes**: "1 bowl" quantity=1, unit=bowl, but bowl size unknown
-
-### SymptomParser Limitations
-
-1. **Emotion vs symptom**: "anxiety" is treated as symptom, but "happy" is not (arbitrary boundary)
-2. **Mood states**: "low mood" is not detected (mood excluded to reduce false positives)
-3. **Negation scope**: Simple window-based negation can miss complex sentences
-4. **Medications**: "took ibuprofen for pain" will detect "pain" (correct) but doesn't link to medication
-5. **Future symptoms**: "headache tomorrow" is detected as current symptom
-
-### General Limitations
-
-1. **No pronoun resolution**: "had cramps" vs "she had cramps" both detect cramps
-2. **No sentence boundaries**: Cross-sentence patterns not fully handled
-3. **Emojis**: 😣 not used for sentiment, only ignored
-4. **Temporal reasoning**: Cannot distinguish "headache yesterday" vs "headache today"
-5. **Numbers**: "Steps 6234" correctly ignored, but relies on context heuristics
+1. **Temporal reasoning**: Cannot distinguish past/future symptoms ("headache tomorrow" vs "headache today")
+2. **Negation scope**: Window-based approach may incorrectly negate across sentence boundaries
+3. **Semantic understanding**: Treats "egg biryani" as separate items; doesn't understand compound dishes
+4. **Lexicon maintenance**: New foods/symptoms require manual updates to detection lists
 
 ## What I Would Improve Next
 
@@ -444,6 +428,6 @@ This project is submitted as part of the Ashwam Backend Engineering Internship a
 
 ---
 
-**Author**: [Your Name]  
+**Author**: Pranav Yayavaram  
 **Date**: December 2025  
 **Version**: 1.0

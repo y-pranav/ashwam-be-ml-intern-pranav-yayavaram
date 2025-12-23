@@ -66,7 +66,8 @@ class FoodParser:
     
     def _build_food_patterns(self):
         """Build regex patterns for food detection."""
-        # Create pattern that matches food words with word boundaries
+        # Sort by length (longest first) to match multi-word items like "protein shake" before "shake"
+        # This prevents partial matches from blocking complete ones
         food_words = '|'.join(re.escape(food) for food in sorted(self.FOOD_LEXICON, key=len, reverse=True))
         self.food_pattern = re.compile(r'\b(' + food_words + r')(?:s)?\b', re.IGNORECASE)
     

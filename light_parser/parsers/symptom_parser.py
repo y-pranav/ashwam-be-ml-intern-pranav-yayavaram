@@ -146,7 +146,8 @@ class SymptomParser:
     
     def _check_negation(self, text: str, symptom_start: int) -> bool:
         """Check if symptom is negated by looking at preceding context."""
-        # Look in window before symptom (up to 30 characters)
+        # Look back 30 chars - empirically works well for "but no headache" patterns
+        # Larger windows risk catching unrelated negations
         window_start = max(0, symptom_start - 30)
         preceding_text = text[window_start:symptom_start].lower()
         
